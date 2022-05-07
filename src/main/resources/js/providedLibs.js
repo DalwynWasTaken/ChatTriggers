@@ -52,8 +52,9 @@
     loadClass("com.chattriggers.ctjs.minecraft.objects.gui.Gui");
     loadInstance("com.chattriggers.ctjs.minecraft.objects.gui.GuiHandler");
 
-    loadClass("com.chattriggers.ctjs.minecraft.objects.message.Message");
-    loadClass("com.chattriggers.ctjs.minecraft.objects.message.TextComponent");
+    // TODO(BREAKING): Does replacing these classes break any APIs?
+    loadClass("gg.essential.universal.wrappers.message.UMessage", "Message");
+    loadClass("gg.essential.universal.wrappers.message.UTextComponent", "TextComponent");
 
     // Wrappers
     loadClass("com.chattriggers.ctjs.minecraft.wrappers.Client");
