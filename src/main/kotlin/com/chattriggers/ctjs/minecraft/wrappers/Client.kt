@@ -6,6 +6,7 @@ import com.chattriggers.ctjs.minecraft.listeners.ClientListener
 import com.chattriggers.ctjs.minecraft.objects.keybind.KeyBind
 import com.chattriggers.ctjs.minecraft.objects.keybind.KeyBindHandler
 import com.chattriggers.ctjs.minecraft.wrappers.inventory.Slot
+import gg.essential.api.utils.GuiUtil
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.*
 import net.minecraft.client.gui.inventory.GuiContainer
@@ -98,7 +99,7 @@ object Client {
     fun getChatGUI(): GuiNewChat? = getMinecraft().ingameGUI?.chatGUI
 
     @JvmStatic
-    fun isInChat(): Boolean = getMinecraft().currentScreen is GuiChat
+    fun isInChat(): Boolean = GuiUtil.getOpenedScreen() is GuiChat
 
     @JvmStatic
     fun getTabGui(): GuiPlayerTabOverlay? = getMinecraft().ingameGUI?.tabList
@@ -172,7 +173,7 @@ object Client {
     @JvmStatic
     fun getCurrentChatMessage(): String {
         return if (isInChat()) {
-            val chatGui = getMinecraft().currentScreen as GuiChat
+            val chatGui = GuiUtil.getOpenedScreen() as GuiChat
             chatGui.inputField.text
         } else ""
     }
@@ -185,7 +186,7 @@ object Client {
     @JvmStatic
     fun setCurrentChatMessage(message: String) {
         if (isInChat()) {
-            val chatGui = getMinecraft().currentScreen as GuiChat
+            val chatGui = GuiUtil.getOpenedScreen() as GuiChat
             chatGui.inputField.text = message
         } else getMinecraft().displayGuiScreen(GuiChat(message))
     }
@@ -290,7 +291,7 @@ object Client {
          * @return the Minecraft gui
          */
         @JvmStatic
-        fun get(): GuiScreen? = getMinecraft().currentScreen
+        fun get(): GuiScreen? = GuiUtil.getOpenedScreen()
 
         /**
          * Gets the slot under the mouse in the current gui, if one exists.
