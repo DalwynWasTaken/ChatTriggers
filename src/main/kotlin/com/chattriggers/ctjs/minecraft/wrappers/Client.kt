@@ -7,6 +7,7 @@ import com.chattriggers.ctjs.minecraft.objects.keybind.KeyBind
 import com.chattriggers.ctjs.minecraft.objects.keybind.KeyBindHandler
 import com.chattriggers.ctjs.minecraft.wrappers.inventory.Slot
 import gg.essential.api.utils.GuiUtil
+import gg.essential.universal.UMinecraft
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.*
 import net.minecraft.client.gui.inventory.GuiContainer
@@ -31,7 +32,7 @@ object Client {
      * @return The Minecraft object
      */
     @JvmStatic
-    fun getMinecraft(): Minecraft = Minecraft.getMinecraft()
+    fun getMinecraft(): Minecraft = UMinecraft.getMinecraft()
 
     /**
      * Gets Minecraft's NetHandlerPlayClient object
@@ -39,12 +40,7 @@ object Client {
      * @return The NetHandlerPlayClient object
      */
     @JvmStatic
-    fun getConnection(): NetHandlerPlayClient? =
-        //#if MC<=10809
-        getMinecraft().netHandler
-        //#else
-        //$$ getMinecraft().connection
-        //#endif
+    fun getConnection() = UMinecraft.getNetHandler()
 
     /**
      * Schedule's a task to run on Minecraft's main thread in [delay] ticks.
